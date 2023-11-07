@@ -155,8 +155,10 @@ const SecondRoute = () => (
 );
 const renderScene = SceneMap({first: FirstRoute, second: SecondRoute});
 
-export default function HomeComponent() {
+export default function HomeComponent({dashboardData}) {
   const [filterModal, setFilterModal] = useState(false);
+
+  console.log('dashboardData: ', dashboardData);
 
   const layout = useWindowDimensions();
 
@@ -190,7 +192,7 @@ export default function HomeComponent() {
           </View>
           <View style={styles.statuscard}>
             <TextRegular
-              text="1 Sep - 12 September 2020"
+              text={dashboardData.mountToDate}
               color={Colors.DARK_BLUE}
               style={styles.period}
             />
@@ -215,7 +217,11 @@ export default function HomeComponent() {
                   size={12}
                   color={Colors.DARK_BLUE}
                 />
-                <TextBold text="32" size={20} color={Colors.DARK_BLUE} />
+                <TextBold
+                  text={dashboardData.priceCheckTotal}
+                  size={20}
+                  color={Colors.DARK_BLUE}
+                />
               </View>
               <View style={styles.cardinfo}>
                 <View
@@ -232,7 +238,11 @@ export default function HomeComponent() {
                   size={12}
                   color={Colors.DARK_BLUE}
                 />
-                <TextBold text="16" size={20} color={Colors.DARK_BLUE} />
+                <TextBold
+                  text={dashboardData.appraisalTotal}
+                  size={20}
+                  color={Colors.DARK_BLUE}
+                />
               </View>
             </View>
             <View
@@ -252,7 +262,11 @@ export default function HomeComponent() {
                   }}
                 />
                 <TextRegular text="PO" size={12} color={Colors.DARK_BLUE} />
-                <TextBold text="12" size={20} color={Colors.DARK_BLUE} />
+                <TextBold
+                  text={dashboardData.POTotal}
+                  size={20}
+                  color={Colors.DARK_BLUE}
+                />
               </View>
               <View style={styles.cardinfo}>
                 <View
@@ -269,7 +283,11 @@ export default function HomeComponent() {
                   size={12}
                   color={Colors.DARK_BLUE}
                 />
-                <TextBold text="4" size={20} color={Colors.DARK_BLUE} />
+                <TextBold
+                  text={dashboardData.POValidTotal}
+                  size={20}
+                  color={Colors.DARK_BLUE}
+                />
               </View>
             </View>
           </View>

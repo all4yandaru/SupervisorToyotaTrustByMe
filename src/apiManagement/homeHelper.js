@@ -1,12 +1,12 @@
 import API from './apiHelper';
 
-const loginSession = async params => {
-  return API('api/v1/user/login', {
-    method: 'POST',
+const dashboardHelper = async token => {
+  return API('api/v1/approval/dashboards', {
+    method: 'GET',
     head: {
       'Content-Type': 'application/json',
+      Authorization: token,
     },
-    body: params,
   })
     .then(response => {
       return response;
@@ -16,4 +16,4 @@ const loginSession = async params => {
     });
 };
 
-export default {loginSession};
+export default {dashboardHelper};

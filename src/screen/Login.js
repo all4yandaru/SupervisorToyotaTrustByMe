@@ -29,7 +29,7 @@ const Login = ({navigation, route}) => {
     }, 1000);
   });
 
-  const loginSession = async () => {
+  const checkLoginSession = async () => {
     const res = await sessionHelper.loginSession({
       email: email,
       password: password,
@@ -62,7 +62,7 @@ const Login = ({navigation, route}) => {
           setPassword={setPassword}
           showPassword={showPassword}
           setShowPassword={setShowPassword}
-          loginSession={loginSession}
+          loginSession={checkLoginSession}
         />
       )}
     </View>
