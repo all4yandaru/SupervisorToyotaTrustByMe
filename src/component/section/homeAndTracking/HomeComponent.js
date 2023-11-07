@@ -17,8 +17,90 @@ import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import FilterHomeModal from '../../modal/FilterHomeModal';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome6';
 
-const FirstRoute = () => {
-  return (
+export default function HomeComponent({dashboardData}) {
+  const [filterModal, setFilterModal] = useState(false);
+
+  console.log('dashboardData: ', dashboardData);
+
+  const layout = useWindowDimensions();
+
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
+    {key: 'first', title: 'Trade In'},
+    {key: 'second', title: 'New Car'},
+  ]);
+  const FirstRoute = () => {
+    return (
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: Colors.GRAY,
+          paddingTop: 12,
+          paddingHorizontal: 20,
+        }}>
+        <View
+          style={{
+            padding: 12,
+            backgroundColor: Colors.WHITE,
+            borderRadius: 8,
+            borderWidth: 1,
+            borderColor: Colors.GRAY,
+            height: 125,
+          }}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <TextRegular
+              text="TR-092018-246"
+              color={Colors.DARK_BLUE}
+              size={12}
+            />
+            <TextMedium
+              text="Sen, 17 Sep 2018 - 10.30"
+              color={Colors.DARK_BLUE}
+              size={12}
+            />
+          </View>
+          <TextBold
+            text="Avanza G AT 2016"
+            style={{marginTop: 8}}
+            color={Colors.DARK_BLUE}
+            size={14}
+          />
+          <View
+            style={{
+              borderStyle: 'dashed',
+              borderWidth: 1,
+              borderColor: Colors.GRAY,
+              height: 1,
+              marginVertical: 10,
+            }}
+          />
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <View>
+              <TextBold text="Handoko" color={Colors.DARK_BLUE} size={12} />
+              <TextRegular
+                text="Cabang Kelapa Gading"
+                color={Colors.DARK_BLUE}
+                size={10}
+              />
+            </View>
+            <View
+              style={{
+                backgroundColor: Colors.BLUE,
+                width: 74,
+                height: 20,
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: 6,
+                marginTop: 10,
+              }}>
+              <TextRegular text="New Approval" color={Colors.WHITE} size={10} />
+            </View>
+          </View>
+        </View>
+      </View>
+    );
+  };
+  const SecondRoute = () => (
     <View
       style={{
         flex: 1,
@@ -87,86 +169,8 @@ const FirstRoute = () => {
       </View>
     </View>
   );
-};
-const SecondRoute = () => (
-  <View
-    style={{
-      flex: 1,
-      backgroundColor: Colors.GRAY,
-      paddingTop: 12,
-      paddingHorizontal: 20,
-    }}>
-    <View
-      style={{
-        padding: 12,
-        backgroundColor: Colors.WHITE,
-        borderRadius: 8,
-        borderWidth: 1,
-        borderColor: Colors.GRAY,
-        height: 125,
-      }}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-        <TextRegular text="TR-092018-246" color={Colors.DARK_BLUE} size={12} />
-        <TextMedium
-          text="Sen, 17 Sep 2018 - 10.30"
-          color={Colors.DARK_BLUE}
-          size={12}
-        />
-      </View>
-      <TextBold
-        text="Avanza G AT 2016"
-        style={{marginTop: 8}}
-        color={Colors.DARK_BLUE}
-        size={14}
-      />
-      <View
-        style={{
-          borderStyle: 'dashed',
-          borderWidth: 1,
-          borderColor: Colors.GRAY,
-          height: 1,
-          marginVertical: 10,
-        }}
-      />
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-        <View>
-          <TextBold text="Handoko" color={Colors.DARK_BLUE} size={12} />
-          <TextRegular
-            text="Cabang Kelapa Gading"
-            color={Colors.DARK_BLUE}
-            size={10}
-          />
-        </View>
-        <View
-          style={{
-            backgroundColor: Colors.BLUE,
-            width: 74,
-            height: 20,
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 6,
-            marginTop: 10,
-          }}>
-          <TextRegular text="New Approval" color={Colors.WHITE} size={10} />
-        </View>
-      </View>
-    </View>
-  </View>
-);
-const renderScene = SceneMap({first: FirstRoute, second: SecondRoute});
+  const renderScene = SceneMap({first: FirstRoute, second: SecondRoute});
 
-export default function HomeComponent({dashboardData}) {
-  const [filterModal, setFilterModal] = useState(false);
-
-  console.log('dashboardData: ', dashboardData);
-
-  const layout = useWindowDimensions();
-
-  const [index, setIndex] = useState(0);
-  const [routes] = useState([
-    {key: 'first', title: 'Trade In'},
-    {key: 'second', title: 'New Car'},
-  ]);
   return (
     <View style={styles.container}>
       <ScrollView>

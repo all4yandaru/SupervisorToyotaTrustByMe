@@ -17,13 +17,9 @@ const Login = ({navigation, route}) => {
 
   useEffect(() => {
     setTimeout(() => {
-      console.log('session: ', session);
-      console.log('account: ', account);
       if (session.token && account) {
-        console.log('key ada');
         navigation.replace('MainRouting');
       } else {
-        console.log('key tidak ada');
         setShowLogin(true);
       }
     }, 1000);
@@ -40,10 +36,10 @@ const Login = ({navigation, route}) => {
     if (res.code === 200) {
       const user = res.user;
       const token = res.token;
-      console.log('token : ', token);
-      console.log('user : ', user);
+
       dispatch({type: 'SESSION_ADD_DATA', data: token});
       dispatch({type: 'ACC_ADD_DATA', data: user});
+
       navigation.replace('MainRouting');
     } else {
       console.log('login failed');
@@ -55,7 +51,6 @@ const Login = ({navigation, route}) => {
     <View style={{flex: 1}}>
       {showLogin && (
         <LoginComponent
-          navigation={navigation}
           email={email}
           setEmail={setEmail}
           password={password}
