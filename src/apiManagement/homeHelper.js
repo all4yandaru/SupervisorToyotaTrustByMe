@@ -16,4 +16,36 @@ const dashboardHelper = async token => {
     });
 };
 
-export default {dashboardHelper};
+const tradeInHelper = async token => {
+  return API('api/v1/approval/trade-in', {
+    method: 'GET',
+    head: {
+      'Content-Type': 'application/json',
+      Authorization: token,
+    },
+  })
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
+const newCarHelper = async token => {
+  return API('api/v1/approval/new-car', {
+    method: 'GET',
+    head: {
+      'Content-Type': 'application/json',
+      Authorization: token,
+    },
+  })
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
+export default {dashboardHelper, tradeInHelper, newCarHelper};

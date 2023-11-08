@@ -1,5 +1,6 @@
 import {
   Dimensions,
+  FlatList,
   Image,
   ImageBackground,
   ScrollView,
@@ -17,10 +18,12 @@ import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import FilterHomeModal from '../../modal/FilterHomeModal';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome6';
 
-export default function HomeComponent({dashboardData}) {
+export default function HomeComponent({
+  dashboardData,
+  tradeInData,
+  newCarData,
+}) {
   const [filterModal, setFilterModal] = useState(false);
-
-  console.log('dashboardData: ', dashboardData);
 
   const layout = useWindowDimensions();
 
@@ -38,65 +41,80 @@ export default function HomeComponent({dashboardData}) {
           paddingTop: 12,
           paddingHorizontal: 20,
         }}>
-        <View
-          style={{
-            padding: 12,
-            backgroundColor: Colors.WHITE,
-            borderRadius: 8,
-            borderWidth: 1,
-            borderColor: Colors.GRAY,
-            height: 125,
-          }}>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <TextRegular
-              text="TR-092018-246"
-              color={Colors.DARK_BLUE}
-              size={12}
-            />
-            <TextMedium
-              text="Sen, 17 Sep 2018 - 10.30"
-              color={Colors.DARK_BLUE}
-              size={12}
-            />
-          </View>
-          <TextBold
-            text="Avanza G AT 2016"
-            style={{marginTop: 8}}
-            color={Colors.DARK_BLUE}
-            size={14}
-          />
+        {tradeInData.length != 0 ? (
           <View
             style={{
-              borderStyle: 'dashed',
+              padding: 12,
+              backgroundColor: Colors.WHITE,
+              borderRadius: 8,
               borderWidth: 1,
               borderColor: Colors.GRAY,
-              height: 1,
-              marginVertical: 10,
-            }}
-          />
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <View>
-              <TextBold text="Handoko" color={Colors.DARK_BLUE} size={12} />
+              height: 125,
+            }}>
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
               <TextRegular
-                text="Cabang Kelapa Gading"
+                text="TR-092018-246"
                 color={Colors.DARK_BLUE}
-                size={10}
+                size={12}
+              />
+              <TextMedium
+                text="Sen, 17 Sep 2018 - 10.30"
+                color={Colors.DARK_BLUE}
+                size={12}
               />
             </View>
+            <TextBold
+              text="Avanza G AT 2016"
+              style={{marginTop: 8}}
+              color={Colors.DARK_BLUE}
+              size={14}
+            />
             <View
               style={{
-                backgroundColor: Colors.BLUE,
-                width: 74,
-                height: 20,
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 6,
-                marginTop: 10,
-              }}>
-              <TextRegular text="New Approval" color={Colors.WHITE} size={10} />
+                borderStyle: 'dashed',
+                borderWidth: 1,
+                borderColor: Colors.GRAY,
+                height: 1,
+                marginVertical: 10,
+              }}
+            />
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <View>
+                <TextBold text="Handoko" color={Colors.DARK_BLUE} size={12} />
+                <TextRegular
+                  text="Cabang Kelapa Gading"
+                  color={Colors.DARK_BLUE}
+                  size={10}
+                />
+              </View>
+              <View
+                style={{
+                  backgroundColor: Colors.BLUE,
+                  width: 74,
+                  height: 20,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: 6,
+                  marginTop: 10,
+                }}>
+                <TextRegular
+                  text="New Approval"
+                  color={Colors.WHITE}
+                  size={10}
+                />
+              </View>
             </View>
           </View>
-        </View>
+        ) : (
+          <View style={{alignItems: 'center'}}>
+            <TextMedium
+              text={'No Data Available'}
+              style={{color: Colors.DARK_GRAY}}
+            />
+          </View>
+        )}
       </View>
     );
   };
@@ -108,67 +126,95 @@ export default function HomeComponent({dashboardData}) {
         paddingTop: 12,
         paddingHorizontal: 20,
       }}>
-      <View
-        style={{
-          padding: 12,
-          backgroundColor: Colors.WHITE,
-          borderRadius: 8,
-          borderWidth: 1,
-          borderColor: Colors.GRAY,
-          height: 125,
-        }}>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <TextRegular
-            text="TR-092018-246"
-            color={Colors.DARK_BLUE}
-            size={12}
-          />
-          <TextMedium
-            text="Sen, 17 Sep 2018 - 10.30"
-            color={Colors.DARK_BLUE}
-            size={12}
-          />
-        </View>
-        <TextBold
-          text="Avanza G AT 2016"
-          style={{marginTop: 8}}
-          color={Colors.DARK_BLUE}
-          size={14}
-        />
-        <View
-          style={{
-            borderStyle: 'dashed',
-            borderWidth: 1,
-            borderColor: Colors.GRAY,
-            height: 1,
-            marginVertical: 10,
-          }}
-        />
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <View>
-            <TextBold text="Handoko" color={Colors.DARK_BLUE} size={12} />
-            <TextRegular
-              text="Cabang Kelapa Gading"
-              color={Colors.DARK_BLUE}
-              size={10}
-            />
-          </View>
+      {newCarData.length > 0 ? (
+        newCarData.map((item, i) => (
           <View
             style={{
-              backgroundColor: Colors.BLUE,
-              width: 74,
-              height: 20,
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: 6,
-              marginTop: 10,
+              padding: 12,
+              backgroundColor: Colors.WHITE,
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: Colors.GRAY,
+              height: 125,
             }}>
-            <TextRegular text="New Approval" color={Colors.WHITE} size={10} />
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <TextRegular
+                text={item.noNewCar}
+                color={Colors.DARK_BLUE}
+                size={12}
+              />
+              <TextMedium
+                text={item.createdAt}
+                color={Colors.DARK_BLUE}
+                size={12}
+              />
+            </View>
+            <TextBold
+              text={item.NewCar.carName}
+              style={{marginTop: 8}}
+              color={Colors.DARK_BLUE}
+              size={14}
+            />
+            <View
+              style={{
+                borderStyle: 'dashed',
+                borderWidth: 1,
+                borderColor: Colors.GRAY,
+                height: 1,
+                marginVertical: 10,
+              }}
+            />
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <View>
+                <TextBold
+                  text={item.SalesBranch.BranchHead.name}
+                  color={Colors.DARK_BLUE}
+                  size={12}
+                />
+                <TextRegular
+                  text={item.SalesBranch.branch}
+                  color={Colors.DARK_BLUE}
+                  size={10}
+                />
+              </View>
+              <View
+                style={{
+                  backgroundColor: Colors.BLUE,
+                  width: 74,
+                  height: 20,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: 6,
+                  marginTop: 10,
+                }}>
+                <TextRegular
+                  text={item.approvalStatus}
+                  color={Colors.WHITE}
+                  size={10}
+                />
+              </View>
+            </View>
           </View>
+        ))
+      ) : (
+        // <FlatList
+        //   data={newCarData}
+        //   keyExtractor={(item, index) => index.toString()}
+        //   renderItem={({item, index}) => (
+        //   )}
+        // />
+        <View style={{alignItems: 'center'}}>
+          <TextMedium
+            text={'No Data Available'}
+            style={{color: Colors.DARK_GRAY}}
+          />
         </View>
-      </View>
+      )}
     </View>
   );
+
   const renderScene = SceneMap({first: FirstRoute, second: SecondRoute});
 
   return (
@@ -340,9 +386,9 @@ export default function HomeComponent({dashboardData}) {
             <TabBar
               {...props}
               activeColor={Colors.BLUE}
-              inactiveColor={Colors.GRAY}
+              inactiveColor={Colors.DARK_GRAY}
               indicatorStyle={{
-                backgroundColor: Colors.WHITE,
+                backgroundColor: 'rgba(0,0,0,0)',
               }}
               style={{
                 backgroundColor: Colors.WHITE,
